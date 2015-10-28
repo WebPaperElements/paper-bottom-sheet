@@ -8,30 +8,30 @@
 
 <dom-module id="paper-bottom-sheet-item">
 
-	<template>
-		<style>
-			.item {
-				margin: 0;
-				background: white;
-				position: relative;
-			}
-	
-			.ripple {
-				/* Workaround: Ripple doesn"t claim full space in paper-icon-item */
-				padding-right: 0;
-			}
-			
-			:host[warning] {
-				color: var(--paper-red-900);
-			}
-		</style>
+  <template>
+    <style>
+      .item {
+        margin: 0;
+        background: white;
+        position: relative;
+      }
+  
+      .ripple {
+        /* Workaround: Ripple doesn"t claim full space in paper-icon-item */
+        padding-right: 0;
+      }
+      
+      :host[warning] {
+        color: var(--paper-red-900);
+      }
+    </style>
 
-		<paper-icon-item class="item">
-			<paper-ripple class="ripple" fit></paper-ripple>
-			<iron-icon icon=[[icon]] item-icon></iron-icon>
-			<span>[[text]]</span>
-		</paper-icon-item>
-	</template>
+    <paper-icon-item class="item">
+      <paper-ripple class="ripple" fit></paper-ripple>
+      <iron-icon icon=[[icon]] item-icon></iron-icon>
+      <span>[[text]]</span>
+    </paper-icon-item>
+  </template>
 
 </dom-module>
 
@@ -39,21 +39,21 @@
 
 (function() {
 
-	Polymer({
-		is: "paper-bottom-sheet-item",
-		properties: {
-			text: String,
-			icon: {
-				type: String,
-				value: "icons:check"
-			},
-			warning: {
-				type: Boolean,
-				value: false,
-				reflectToAttribute: true
-			}
-		}
-	});
+  Polymer({
+    is: "paper-bottom-sheet-item",
+    properties: {
+      text: String,
+      icon: {
+        type: String,
+        value: "icons:check"
+      },
+      warning: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      }
+    }
+  });
 
 })();
 

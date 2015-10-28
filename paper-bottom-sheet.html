@@ -3,32 +3,36 @@
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-selector/iron-selectable.html">
 <link rel="import" href="paper-bottom-sheet-item.html">
+<link rel="import" href="bottom-sheet-slide-up-animation.html">
+<link rel="import" href="bottom-sheet-slide-down-animation.html">
 
 <dom-module id="paper-bottom-sheet">
 
-	<template>
-		<style>
-			.dialog {
-				background-color: rgba(0,0,0,0.6)!important;
-				margin: 0!important;
-			}
-	
-			.content {
-				position: absolute;
-				width: 100%;
-				bottom: 0;
-				margin: 0;
-				padding: 0;
-			}
-		</style>
+  <template>
+    <style>
+      .dialog {
+        background-color: rgba(0,0,0,0)!important;
+        margin: 0!important;
+      }
+  
+      .content {
+        position: absolute;
+        width: 300px;
+        bottom: 0;
+        margin: 0;
+        padding: 0;
+        left: 50%;
+        margin-left: -150px;
+      }
+    </style>
 
-		<paper-dialog id="dialog" class="dialog fit" no-cancel-on-outside-click modal>
-			<div class="content">
-				<content id="items"></content>
-				<paper-bottom-sheet-item id="cancel" text="[[cancelText]]" icon="icons:close" on-tap="close"></paper-bottom-sheet-item>
-			</div>
-		</paper-dialog>
-	</template>
+    <paper-dialog id="dialog" on-tap="close" class="dialog fit" modal>
+      <div class="content" id="content">
+        <content id="items"></content>
+        <!-- <paper-bottom-sheet-item id="cancel" text="[[cancelText]]" icon="icons:close" on-tap="close"></paper-bottom-sheet-item> -->
+      </div>
+    </paper-dialog>
+  </template>
 
 </dom-module>
 
@@ -36,28 +40,44 @@
 
 (function() {
 
-	Polymer({
-		is: "paper-bottom-sheet",
+  Polymer({
+    is: "paper-bottom-sheet",
 
-		behaviors: [
-			Polymer.IronSelectableBehavior
-		],
+    behaviors: [
+      Polymer.IronSelectableBehavior
+    ],
 
-		properties: {
-			cancelText: {
-				type: String,
-				value: "Cancel"
-			}
-		},
+    properties: {
+      cancelText: {
+        type: String,
+        value: "Cancel"
+      }
+    },
 
-		// Public methods
-		open: function() {
-			this.$.dialog.open();
-		},
-		close: function() {
-			this.$.dialog.close();
-		}
-	});
+    ready: function(){
+      this.$.dialog.animationConfig = {
+        'entry': [
+          {
+            name: 'bottom-sheet-slide-up-animation',
+            node: this.$.content
+          }
+        ],
+        'exit': [
+          {
+            name: 'bottom-sheet-slide-down-animation',
+            node: this.$.content
+          }
+        ]
+      };
+    },
+    // Public methods
+    open: function() {
+      this.$.dialog.open();
+    },
+    close: function() {
+      this.$.dialog.close();
+    }
+  });
 
 })();
 
