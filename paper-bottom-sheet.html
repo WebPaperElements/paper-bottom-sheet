@@ -23,7 +23,7 @@
       .dialog{
         position: absolute;
         bottom: 0;
-        /*left: 50%;*/
+        left: 0;
         /*width: 300px;*/
         /*margin-left: -150px;*/
         overflow: hidden;
@@ -69,6 +69,10 @@
       cancelText: {
         type: String,
         value: "Cancel"
+      },
+      distanceFromTop: {
+        type: Number,
+        value: 100
       }
     },
 
@@ -98,6 +102,7 @@
     open: function() {
       this._setContentHeight();
       this._showBottomSheet();
+      this._setDialogPosition();
 
       this.playAnimation('entry', 'entry');  
     },
@@ -123,7 +128,15 @@
     },
 
     _setContentHeight: function(){
-      this.$.content.style.maxHeight = (window.innerHeight - 120) + 'px';
+      this.$.content.style.maxHeight = (window.innerHeight - this.distanceFromTop) + 'px';
+    },
+
+    _setDialogPosition: function(){
+      // this.$.dialog.style.left = '0';
+      var dialogWidth = $(this.$.dialog).width();
+
+      this.$.dialog.style.left = '50%';
+      this.$.dialog.style.marginLeft = (dialogWidth / -2) + 'px';
     }
   });
 
