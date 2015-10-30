@@ -73,6 +73,10 @@
       distanceFromTop: {
         type: Number,
         value: 100
+      },
+      closeInProgress: {
+        type: Boolean,
+        value: false
       }
     },
 
@@ -108,12 +112,16 @@
     },
 
     close: function() {
-      this.playAnimation('exit', 'exit');
+      if(!this.closeInProgress){
+        this.closeInProgress = true;
+        this.playAnimation('exit', 'exit');
+      }
     },
 
     _onNeonAnimationFinish: function(event, animationHandler){
       if(animationHandler === 'exit'){
         this._hideBottomSheet();
+        this.closeInProgress = false;
       }
     },
 
