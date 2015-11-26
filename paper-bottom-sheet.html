@@ -106,6 +106,8 @@
     },
 
     ready: function(){
+      var $this = this;
+
       this._hideBottomSheet();
 
       this.animationConfig = {
@@ -130,9 +132,16 @@
           }
         ]
       };
+
+      $(window).resize(function() {
+        $this._setContentHeight();
+      });
     },
 
     open: function() {
+      $(this.$.content).animate({
+        scrollTop: 0
+      });
       this._setContentHeight();
       this._showBottomSheet();
       this._setDialogPosition();
