@@ -33,6 +33,14 @@
       iron-icon{
         color: rgba(0, 0, 0, 0.54);
       }
+
+      .official-color {
+        width: 18px;
+        height: 18px;
+        margin-top: -3px;
+        margin-left: 4px;
+        color: #1e88e5;
+      }
   
       .ripple {
         /* Workaround: Ripple doesn"t claim full space in paper-icon-item */
@@ -49,7 +57,14 @@
 
       <iron-icon src="{{url}}" icon="{{icon}}" item-icon></iron-icon>
 
-      <span class="text">[[text]]</span>
+      <span class="text">
+        [[text]]
+        <template is="dom-if" if="{{official}}">
+          <iron-icon class="official-color" icon="icons:verified-user" item-icon></iron-icon>
+        </template>
+      </span>
+
+
     </paper-icon-item>
   </template>
 
@@ -73,8 +88,13 @@
         type: Boolean,
         value: false,
         reflectToAttribute: true
+      },
+      official: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
       }
-    }
+    },
   });
 
 })();
